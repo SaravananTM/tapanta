@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join as Expert - Tapanta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <nav class="nav">
+      <a href="index.html" class="nav__logo">Tapanta</a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="experts.html">Find Experts</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html" class="nav__cta">Book Now</a></li>
+      </ul>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Join as an Expert</h1>
+      <p>Share your knowledge and earn on Tapanta</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width: 700px;">
+      <div id="formSection">
+        <p style="color: var(--text-light); margin-bottom: 24px; line-height: 1.7;">Fill out the form below to apply as an expert. Our admin team will review your application and verify your credentials. You'll be notified once approved.</p>
+        <form class="contact-form" id="expertForm">
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" placeholder="Dr. John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" placeholder="+91 9876543210" required>
+          </div>
+          <div class="form-group">
+            <label for="category">Category *</label>
+            <select id="category" required>
+              <option value="">Select your expertise</option>
+              <option>Health & Nutrition</option>
+              <option>Career Guidance</option>
+              <option>Legal Advice</option>
+              <option>Business Consulting</option>
+              <option>Finance & Tax</option>
+              <option>Mental Health</option>
+              <option>Technology</option>
+              <option>Fitness & Wellness</option>
+              <option>Astrology</option>
+              <option>Education</option>
+              <option>Relationships</option>
+              <option>Startup Advice</option>
+              <option>Spiritual Guidance</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="specialty">Specialty / Title *</label>
+            <input type="text" id="specialty" placeholder="e.g. General Physician, Corporate Lawyer" required>
+          </div>
+          <div class="form-group">
+            <label for="experience">Years of Experience *</label>
+            <input type="number" id="experience" placeholder="e.g. 8" min="1" max="50" required>
+          </div>
+          <div class="form-group">
+            <label for="qualifications">Qualifications *</label>
+            <textarea id="qualifications" placeholder="List your degrees, certifications, memberships (one per line)" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="bio">Short Bio *</label>
+            <textarea id="bio" placeholder="Tell users about yourself, your experience, and how you can help them..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Price per Session (₹) *</label>
+            <input type="number" id="price" placeholder="e.g. 500" min="100" required>
+          </div>
+          <div class="form-group">
+            <label for="linkedin">LinkedIn / Website URL (for verification)</label>
+            <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg btn--full">Submit Application</button>
+        </form>
+      </div>
+      <div id="successSection" style="display: none; text-align: center; padding: 60px 0;">
+        <div style="font-size: 4rem; margin-bottom: 20px;">✅</div>
+        <h2 style="margin-bottom: 12px;">Application Submitted!</h2>
+        <p style="color: var(--text-light); margin-bottom: 24px;">Thank you for applying. Our admin will review and verify your credentials. You'll appear on the platform once approved.</p>
+        <a href="index.html" class="btn btn--primary">Back to Home</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">Tapanta</div>
+          <p class="footer__desc">Making expert knowledge accessible, fast, and affordable for everyone.</p>
+        </div>
+        <div><h4>Platform</h4><ul><li><a href="categories.html">Categories</a></li><li><a href="experts.html">Find Experts</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About Us</a></li></ul></div>
+        <div><h4>Support</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="contact.html">FAQ</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+        <div><h4>For Experts</h4><ul><li><a href="join-expert.html">Join as Expert</a></li><li><a href="#">Expert Dashboard</a></li></ul></div>
+      </div>
+      <div class="footer__bottom">&copy; 2026 Tapanta (tapanta.in). All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/experts-data.js"></script>
+</body>
+</html>

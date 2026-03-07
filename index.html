@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tapanta - Talk to Experts Instantly</title>
+  <meta name="description" content="Connect with verified experts from different fields. Get personalized advice through chat, call, or video consultation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <a href="index.html" class="nav__logo">Tapanta</a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="experts.html">Find Experts</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html" class="nav__cta">Book Now</a></li>
+      </ul>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Talk to Experts Instantly</h1>
+      <p>Get personalized advice from verified professionals in minutes. Career, health, legal, finance and more.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Find an expert… e.g. Career Coach, Lawyer" aria-label="Search for an expert">
+        <button type="button">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Categories -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Popular Categories</h2>
+      <p class="section__subtitle">Browse experts by area of expertise</p>
+      <div class="categories-grid">
+        <a href="experts.html" class="category-card">
+          <div class="category-card__icon">🏥</div>
+          <div class="category-card__name">Health</div>
+        </a>
+        <a href="experts.html" class="category-card">
+          <div class="category-card__icon">💼</div>
+          <div class="category-card__name">Career</div>
+        </a>
+        <a href="experts.html" class="category-card">
+          <div class="category-card__icon">⚖️</div>
+          <div class="category-card__name">Legal</div>
+        </a>
+        <a href="experts.html" class="category-card">
+          <div class="category-card__icon">📊</div>
+          <div class="category-card__name">Business</div>
+        </a>
+        <a href="experts.html" class="category-card">
+          <div class="category-card__icon">💰</div>
+          <div class="category-card__name">Finance</div>
+        </a>
+        <a href="experts.html" class="category-card">
+          <div class="category-card__icon">🧠</div>
+          <div class="category-card__name">Mental Health</div>
+        </a>
+        <a href="experts.html" class="category-card">
+          <div class="category-card__icon">💻</div>
+          <div class="category-card__name">Technology</div>
+        </a>
+        <a href="experts.html" class="category-card">
+          <div class="category-card__icon">🏋️</div>
+          <div class="category-card__name">Fitness</div>
+        </a>
+        <a href="experts.html" class="category-card">
+          <div class="category-card__icon">🔮</div>
+          <div class="category-card__name">Astrology</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Experts -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Top Rated Experts</h2>
+      <p class="section__subtitle">Trusted professionals ready to help you</p>
+      <div class="experts-grid" id="topExpertsGrid"></div>
+      <div id="topExpertsEmpty" style="text-align: center; padding: 40px 20px; color: var(--text-light);">
+        <p>No experts yet. <a href="join-expert.html">Be the first to join</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">How Tapanta Works</h2>
+      <p class="section__subtitle">Get expert advice in 4 simple steps</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step__number">1</div>
+          <div class="step__title">Choose a Category</div>
+          <div class="step__desc">Browse categories like Health, Career, Legal, Finance and more.</div>
+        </div>
+        <div class="step">
+          <div class="step__number">2</div>
+          <div class="step__title">Select an Expert</div>
+          <div class="step__desc">View profiles, ratings, reviews and pick the right expert for you.</div>
+        </div>
+        <div class="step">
+          <div class="step__number">3</div>
+          <div class="step__title">Book a Session</div>
+          <div class="step__desc">Choose chat, audio call, or video call. Pick a time slot.</div>
+        </div>
+        <div class="step">
+          <div class="step__number">4</div>
+          <div class="step__title">Get Advice</div>
+          <div class="step__desc">Pay securely and start your consultation instantly.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">What Our Users Say</h2>
+      <p class="section__subtitle">Real stories from real people</p>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="testimonial__text">"I was confused about my career path after college. The career coach on Tapanta helped me create a clear roadmap in just one session. Highly recommended!"</div>
+          <div class="testimonial__author">Ananya R.</div>
+          <div class="testimonial__role">Student, Delhi</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial__text">"Got instant legal advice for my startup incorporation. The lawyer was professional and explained everything clearly. Saved me thousands in consultation fees."</div>
+          <div class="testimonial__author">Vikram S.</div>
+          <div class="testimonial__role">Startup Founder, Bangalore</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial__text">"The nutritionist on Tapanta created a personalized diet plan for me. I've lost 8 kgs in 3 months following her advice. Amazing platform!"</div>
+          <div class="testimonial__author">Meera K.</div>
+          <div class="testimonial__role">IT Professional, Mumbai</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Are You an Expert?</h2>
+        <p>Join Tapanta and monetize your knowledge. Help people while earning from anywhere.</p>
+        <a href="join-expert.html" class="btn btn--accent btn--lg">Join as Expert</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">Tapanta</div>
+          <p class="footer__desc">Making expert knowledge accessible, fast, and affordable for everyone. Connect with verified professionals and get the guidance you need.</p>
+        </div>
+        <div>
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="experts.html">Find Experts</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>For Experts</h4>
+          <ul>
+            <li><a href="join-expert.html">Join as Expert</a></li>
+            <li><a href="#">Expert Dashboard</a></li>
+            <li><a href="#">Expert Guidelines</a></li>
+            <li><a href="#">Pricing Plans</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        &copy; 2026 Tapanta (tapanta.in). All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/experts-data.js"></script>
+  <script>
+    // Populate top experts on home page from approved list
+    const ICONS = {
+      'Health & Nutrition': '👩‍⚕️', 'Career Guidance': '👨‍💻', 'Legal Advice': '👩‍⚖️',
+      'Business Consulting': '👨‍💼', 'Finance & Tax': '💰', 'Mental Health': '🧘‍♀️',
+      'Technology': '💻', 'Fitness & Wellness': '💪', 'Astrology': '🔮',
+      'Education': '🎓', 'Relationships': '💑', 'Startup Advice': '🚀',
+      'Spiritual Guidance': '🙏', 'Nutrition & Diet': '🍎'
+    };
+    const topGrid = document.getElementById('topExpertsGrid');
+    const topEmpty = document.getElementById('topExpertsEmpty');
+    if (topGrid) {
+      const approved = ExpertsDB.getApproved().slice(0, 4);
+      if (approved.length > 0) {
+        topGrid.innerHTML = approved.map(e => {
+          const d = document.createElement('div');
+          d.textContent = e.name; const safeName = d.innerHTML;
+          d.textContent = e.specialty; const safeSp = d.innerHTML;
+          d.textContent = e.category; const safeCat = d.innerHTML;
+          return `<a href="expert-profile.html?id=${e.id}" class="expert-card">
+            <div class="expert-card__img">${ICONS[e.category] || '👤'}</div>
+            <div class="expert-card__body">
+              <div class="expert-card__name">${safeName}</div>
+              <div class="expert-card__specialty">${safeSp} · ${e.experience} yrs exp</div>
+              <div class="expert-card__meta">
+                <span class="expert-card__rating">⭐ ${e.rating || 'New'}</span>
+                <span class="expert-card__price">₹${e.price}/session</span>
+              </div>
+              <div class="expert-card__tags"><span class="tag">${safeCat}</span></div>
+              <div class="expert-card__actions"><span class="btn btn--primary btn--sm btn--full">Book Now</span></div>
+            </div>
+          </a>`;
+        }).join('');
+        if (topEmpty) topEmpty.style.display = 'none';
+      } else {
+        topGrid.style.display = 'none';
+        if (topEmpty) topEmpty.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>

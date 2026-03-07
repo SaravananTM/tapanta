@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Tapanta</title>
+  <meta name="description" content="Get in touch with Tapanta. We're here to help with any questions or concerns.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <nav class="nav">
+      <a href="index.html" class="nav__logo">Tapanta</a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="experts.html">Find Experts</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html" class="nav__cta">Book Now</a></li>
+      </ul>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <h2 style="font-size: 1.3rem; margin-bottom: 24px;">Send us a Message</h2>
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! We will get back to you soon.');">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <select id="subject">
+                <option>General Inquiry</option>
+                <option>Join as Expert</option>
+                <option>Technical Support</option>
+                <option>Payment Issue</option>
+                <option>Report a Problem</option>
+                <option>Partnership</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Tell us how we can help..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg">Send Message</button>
+          </form>
+        </div>
+
+        <div>
+          <h2 style="font-size: 1.3rem; margin-bottom: 24px;">Get in Touch</h2>
+          <div class="contact-info">
+            <div class="contact-info__item">
+              <div class="contact-info__icon">📧</div>
+              <div>
+                <div class="contact-info__title">Email</div>
+                <div class="contact-info__text">support@tapanta.in<br>experts@tapanta.in</div>
+              </div>
+            </div>
+            <div class="contact-info__item">
+              <div class="contact-info__icon">💬</div>
+              <div>
+                <div class="contact-info__title">Live Chat</div>
+                <div class="contact-info__text">Available Mon-Sat, 9 AM - 8 PM IST<br>Average response time: 2 minutes</div>
+              </div>
+            </div>
+            <div class="contact-info__item">
+              <div class="contact-info__icon">📍</div>
+              <div>
+                <div class="contact-info__title">Office</div>
+                <div class="contact-info__text">Tapanta Technologies Pvt. Ltd.<br>India</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq" style="margin-top: 40px;">
+            <h2 style="font-size: 1.3rem; margin-bottom: 16px;">Frequently Asked Questions</h2>
+            <div class="faq__item">
+              <div class="faq__question" onclick="this.parentElement.classList.toggle('active')">
+                How do I book a consultation?
+                <span>+</span>
+              </div>
+              <div class="faq__answer">Browse our categories, select an expert, choose your preferred consultation type (chat, call, or video), pick a time slot, and pay securely. It's that simple!</div>
+            </div>
+            <div class="faq__item">
+              <div class="faq__question" onclick="this.parentElement.classList.toggle('active')">
+                Are the experts verified?
+                <span>+</span>
+              </div>
+              <div class="faq__answer">Yes, every expert on Tapanta goes through a thorough verification process. We check their qualifications, experience, and credentials before they can offer consultations.</div>
+            </div>
+            <div class="faq__item">
+              <div class="faq__question" onclick="this.parentElement.classList.toggle('active')">
+                What payment methods are accepted?
+                <span>+</span>
+              </div>
+              <div class="faq__answer">We accept UPI, debit cards, credit cards, and popular digital wallets. All payments are processed securely.</div>
+            </div>
+            <div class="faq__item">
+              <div class="faq__question" onclick="this.parentElement.classList.toggle('active')">
+                Can I get a refund?
+                <span>+</span>
+              </div>
+              <div class="faq__answer">Yes, if an expert doesn't show up or you're unsatisfied with the consultation, you can request a refund within 24 hours. Our team will review and process it promptly.</div>
+            </div>
+            <div class="faq__item">
+              <div class="faq__question" onclick="this.parentElement.classList.toggle('active')">
+                How do I become an expert on Tapanta?
+                <span>+</span>
+              </div>
+              <div class="faq__answer">Fill out the "Join as Expert" form with your details, qualifications, and experience. Our team will review your application and get back to you within 48 hours.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">Tapanta</div>
+          <p class="footer__desc">Making expert knowledge accessible, fast, and affordable for everyone.</p>
+        </div>
+        <div><h4>Platform</h4><ul><li><a href="categories.html">Categories</a></li><li><a href="experts.html">Find Experts</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About Us</a></li></ul></div>
+        <div><h4>Support</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="contact.html">FAQ</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+        <div><h4>For Experts</h4><ul><li><a href="join-expert.html">Join as Expert</a></li><li><a href="#">Expert Dashboard</a></li></ul></div>
+      </div>
+      <div class="footer__bottom">&copy; 2026 Tapanta (tapanta.in). All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

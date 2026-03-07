@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Tapanta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .admin-login {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 40px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-align: center;
+    }
+    .admin-login h2 { margin-bottom: 8px; }
+    .admin-login p { color: var(--text-light); margin-bottom: 24px; font-size: 0.9rem; }
+    .admin-login .form-group { text-align: left; margin-bottom: 16px; }
+    .admin-login .error { color: #EF4444; font-size: 0.85rem; margin-top: 8px; display: none; }
+
+    .admin-panel { display: none; }
+    .admin-panel.active { display: block; }
+
+    .admin-tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 2px solid var(--border); }
+    .admin-tab {
+      padding: 12px 24px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      color: var(--text-light);
+      transition: all var(--transition);
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: inherit;
+    }
+    .admin-tab:hover { color: var(--primary); }
+    .admin-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+    .admin-tab .badge {
+      background: #EF4444;
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 10px;
+      margin-left: 6px;
+      font-weight: 700;
+    }
+
+    .expert-row {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .expert-row__info { flex: 1; }
+    .expert-row__name { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+    .expert-row__meta { color: var(--text-light); font-size: 0.88rem; margin-bottom: 8px; }
+    .expert-row__detail { font-size: 0.88rem; color: var(--text-light); line-height: 1.6; }
+    .expert-row__detail strong { color: var(--text); }
+
+    .expert-row__actions { display: flex; gap: 8px; flex-shrink: 0; align-items: flex-start; flex-wrap: wrap; }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .status-badge--pending { background: #FEF3C7; color: #92400E; }
+    .status-badge--approved { background: #D1FAE5; color: #065F46; }
+    .status-badge--rejected { background: #FEE2E2; color: #991B1B; }
+
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .admin-stat {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+    }
+    .admin-stat__value { font-size: 2rem; font-weight: 800; color: var(--primary); }
+    .admin-stat__label { color: var(--text-light); font-size: 0.85rem; margin-top: 4px; }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-light);
+    }
+    .empty-state__icon { font-size: 3rem; margin-bottom: 12px; }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .admin-header h1 { font-size: 1.5rem; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <nav class="nav">
+      <a href="index.html" class="nav__logo">Tapanta</a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="admin.html" style="color: var(--primary); font-weight: 700;">Admin Panel</a></li>
+      </ul>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Login Screen -->
+  <div id="loginScreen">
+    <div class="admin-login">
+      <h2>🔒 Admin Login</h2>
+      <p>Enter your admin password to manage experts</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="adminPass">Password</label>
+          <input type="password" id="adminPass" placeholder="Enter admin password" required>
+        </div>
+        <div class="error" id="loginError">Incorrect password. Try again.</div>
+        <button type="submit" class="btn btn--primary btn--full">Login</button>
+      </form>
+      <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-light);">Default password: <code>tapanta2026</code></p>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div id="adminPanel" class="admin-panel">
+    <section class="section" style="padding-top: 32px;">
+      <div class="container">
+        <div class="admin-header">
+          <h1>Expert Management</h1>
+          <button class="btn btn--outline btn--sm" id="logoutBtn">Logout</button>
+        </div>
+
+        <div class="admin-stats" id="adminStats"></div>
+
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-tab="pending">Pending <span class="badge" id="pendingCount">0</span></button>
+          <button class="admin-tab" data-tab="approved">Approved</button>
+          <button class="admin-tab" data-tab="rejected">Rejected</button>
+          <button class="admin-tab" data-tab="all">All</button>
+        </div>
+
+        <div id="expertsList"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/experts-data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

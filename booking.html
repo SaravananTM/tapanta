@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Consultation - Tapanta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <nav class="nav">
+      <a href="index.html" class="nav__logo">Tapanta</a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="experts.html">Find Experts</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html" class="nav__cta">Book Now</a></li>
+      </ul>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Book a Consultation</h1>
+      <p>Choose your preferred consultation type and time</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="booking-grid">
+        <div>
+          <h2 style="font-size: 1.2rem; margin-bottom: 20px;">1. Choose Consultation Type</h2>
+          <div class="booking__options">
+            <div class="booking__option active" data-type="chat">
+              <div class="booking__option-icon">💬</div>
+              <div>
+                <div class="booking__option-title">Chat Consultation</div>
+                <div class="booking__option-desc">Text-based consultation. Great for quick questions and follow-ups.</div>
+              </div>
+            </div>
+            <div class="booking__option" data-type="call">
+              <div class="booking__option-icon">📞</div>
+              <div>
+                <div class="booking__option-title">Audio Call</div>
+                <div class="booking__option-desc">Voice consultation for detailed discussions and explanations.</div>
+              </div>
+            </div>
+            <div class="booking__option" data-type="video">
+              <div class="booking__option-icon">📹</div>
+              <div>
+                <div class="booking__option-title">Video Call</div>
+                <div class="booking__option-desc">Face-to-face video consultation for comprehensive advice.</div>
+              </div>
+            </div>
+          </div>
+
+          <h2 style="font-size: 1.2rem; margin-top: 32px; margin-bottom: 16px;">2. Select Date</h2>
+          <div class="filters" style="margin-bottom: 0;">
+            <input type="date" aria-label="Select date" style="flex: 1;">
+          </div>
+
+          <h2 style="font-size: 1.2rem; margin-top: 32px; margin-bottom: 16px;">3. Select Time Slot</h2>
+          <div class="booking__slots">
+            <div class="slot">9:00 AM</div>
+            <div class="slot">9:30 AM</div>
+            <div class="slot active">10:00 AM</div>
+            <div class="slot">10:30 AM</div>
+            <div class="slot">11:00 AM</div>
+            <div class="slot">11:30 AM</div>
+            <div class="slot">4:00 PM</div>
+            <div class="slot">4:30 PM</div>
+            <div class="slot">5:00 PM</div>
+            <div class="slot">5:30 PM</div>
+            <div class="slot">6:00 PM</div>
+            <div class="slot">6:30 PM</div>
+          </div>
+        </div>
+
+        <aside class="booking__summary">
+          <h3>Booking Summary</h3>
+          <div class="summary__row">
+            <span>Expert</span>
+            <span>Dr. Priya Sharma</span>
+          </div>
+          <div class="summary__row">
+            <span>Type</span>
+            <span>Chat Consultation</span>
+          </div>
+          <div class="summary__row">
+            <span>Duration</span>
+            <span>30 minutes</span>
+          </div>
+          <div class="summary__row">
+            <span>Date</span>
+            <span>Select a date</span>
+          </div>
+          <div class="summary__row">
+            <span>Time</span>
+            <span>10:00 AM</span>
+          </div>
+          <div class="summary__row">
+            <span>Consultation Fee</span>
+            <span>₹500</span>
+          </div>
+          <div class="summary__row">
+            <span>Platform Fee</span>
+            <span>₹50</span>
+          </div>
+          <div class="summary__row">
+            <span class="summary__total">Total</span>
+            <span class="summary__total">₹550</span>
+          </div>
+
+          <h3 style="margin-top: 24px;">Payment Method</h3>
+          <div class="booking__options" style="margin-top: 12px;">
+            <div class="booking__option active" style="padding: 12px 16px;">
+              <div>💳</div>
+              <div><div class="booking__option-title" style="font-size: 0.9rem;">UPI</div></div>
+            </div>
+            <div class="booking__option" style="padding: 12px 16px;">
+              <div>💳</div>
+              <div><div class="booking__option-title" style="font-size: 0.9rem;">Debit / Credit Card</div></div>
+            </div>
+            <div class="booking__option" style="padding: 12px 16px;">
+              <div>👛</div>
+              <div><div class="booking__option-title" style="font-size: 0.9rem;">Wallet</div></div>
+            </div>
+          </div>
+
+          <button class="btn btn--primary btn--full btn--lg" style="margin-top: 20px;">Pay ₹550 & Book</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">Tapanta</div>
+          <p class="footer__desc">Making expert knowledge accessible, fast, and affordable for everyone.</p>
+        </div>
+        <div><h4>Platform</h4><ul><li><a href="categories.html">Categories</a></li><li><a href="experts.html">Find Experts</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About Us</a></li></ul></div>
+        <div><h4>Support</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="contact.html">FAQ</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+        <div><h4>For Experts</h4><ul><li><a href="join-expert.html">Join as Expert</a></li><li><a href="#">Expert Dashboard</a></li></ul></div>
+      </div>
+      <div class="footer__bottom">&copy; 2026 Tapanta (tapanta.in). All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
