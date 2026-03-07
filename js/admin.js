@@ -5,7 +5,6 @@ const AUTH_KEY = 'tapanta_admin_auth';
 
 let currentTab = 'pending';
 
-// Auth
 function isLoggedIn() {
   return sessionStorage.getItem(AUTH_KEY) === 'true';
 }
@@ -23,7 +22,6 @@ function showLogin() {
   document.getElementById('adminPanel').classList.remove('active');
 }
 
-// Login form
 document.getElementById('loginForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const pass = document.getElementById('adminPass').value;
@@ -37,7 +35,6 @@ document.getElementById('loginForm').addEventListener('submit', (e) => {
 
 document.getElementById('logoutBtn').addEventListener('click', showLogin);
 
-// Tabs
 document.querySelectorAll('.admin-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -47,9 +44,8 @@ document.querySelectorAll('.admin-tab').forEach(tab => {
   });
 });
 
-// Render stats
-function renderStats() {
-  const all = ExpertsDB.getAll();
+async function renderStats() {
+  const all = await ExpertsDB.getAll();
   const pending = all.filter(e => e.status === 'pending').length;
   const approved = all.filter(e => e.status === 'approved').length;
   const rejected = all.filter(e => e.status === 'rejected').length;
@@ -75,10 +71,8 @@ function renderStats() {
   `;
 }
 
-
-// Render expert list
-function renderExperts() {
-  const all = ExpertsDB.getAll();
+async function renderExperts() {
+  const all = await ExpertsDB.getAll();
   let filtered;
 
   if (currentTab === 'all') filtered = all;
@@ -131,25 +125,26 @@ function renderExperts() {
   `).join('');
 }
 
-function approveExpert(id) {
+
+async function approveExpert(id) {
   if (confirm('Approve this expert? They will appear on the public site.')) {
-    ExpertsDB.approve(id);
+    await ExpertsDB.approve(id);
     renderStats();
     renderExperts();
   }
 }
 
-function rejectExpert(id) {
+async function rejectExpert(id) {
   if (confirm('Reject this expert application?')) {
-    ExpertsDB.reject(id);
+    await ExpertsDB.reject(id);
     renderStats();
     renderExperts();
   }
 }
 
-function deleteExpert(id) {
+async function deleteExpert(id) {
   if (confirm('Permanently delete this application? This cannot be undone.')) {
-    ExpertsDB.delete(id);
+    await ExpertsDB.delete(id);
     renderStats();
     renderExperts();
   }

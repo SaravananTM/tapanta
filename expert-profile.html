@@ -132,21 +132,23 @@
   <script src="js/main.js"></script>
   <script src="js/experts-data.js"></script>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
-    if (id) {
-      const e = ExpertsDB.getById(id);
-      if (e && e.status === 'approved') {
-        const esc = (s) => { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
-        document.querySelector('.profile__name').textContent = e.name;
-        document.querySelector('.profile__title').textContent = e.specialty;
-        document.querySelector('.profile__price').innerHTML = `₹${e.price} <span>/ session</span>`;
-        document.querySelector('.profile__bio').textContent = e.bio;
-        const quals = e.qualifications.split('\n').filter(q => q.trim());
-        document.querySelector('.profile__qualifications').innerHTML = quals.map(q => `<li>${esc(q)}</li>`).join('');
-        document.title = `${e.name} - Tapanta`;
+    (async function() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if (id) {
+        const e = await ExpertsDB.getById(id);
+        if (e && e.status === 'approved') {
+          const esc = (s) => { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
+          document.querySelector('.profile__name').textContent = e.name;
+          document.querySelector('.profile__title').textContent = e.specialty;
+          document.querySelector('.profile__price').innerHTML = `₹${e.price} <span>/ session</span>`;
+          document.querySelector('.profile__bio').textContent = e.bio;
+          const quals = e.qualifications.split('\n').filter(q => q.trim());
+          document.querySelector('.profile__qualifications').innerHTML = quals.map(q => `<li>${esc(q)}</li>`).join('');
+          document.title = `${e.name} - Tapanta`;
+        }
       }
-    }
+    })();
   </script>
 </body>
 </html>

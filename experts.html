@@ -112,8 +112,8 @@
       'Spiritual Guidance': '🙏', 'Nutrition & Diet': '🍎'
     };
 
-    function renderApprovedExperts() {
-      const experts = ExpertsDB.getApproved();
+    async function renderApprovedExperts() {
+      const experts = await ExpertsDB.getApproved();
       const grid = document.getElementById('expertsGrid');
       const noExperts = document.getElementById('noExperts');
 
