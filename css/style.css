@@ -110,7 +110,6 @@ ul { list-style: none; }
   padding: 80px 0 100px;
   text-align: center;
   position: relative;
-  overflow: hidden;
 }
 
 .hero::after {
@@ -184,7 +183,7 @@ ul { list-style: none; }
   margin-top: 6px;
   max-height: 320px;
   overflow-y: auto;
-  z-index: 50;
+  z-index: 999;
 }
 .sug-item {
   display: flex;
