@@ -145,8 +145,8 @@ ul { list-style: none; }
   margin: 0 auto;
   background: #fff;
   border-radius: 50px;
-  overflow: hidden;
   box-shadow: var(--shadow-lg);
+  position: relative;
 }
 
 .search-bar input {
