@@ -875,3 +875,17 @@ ul { list-style: none; }
   .blog-grid { grid-template-columns: 1fr; }
   .booking__slots { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Auth - Nav Profile */
+.nav-profile { position: relative; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 4px 8px; border-radius: 8px; transition: background 0.2s; }
+.nav-profile:hover { background: rgba(255,255,255,0.1); }
+.nav-profile__img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); }
+.nav-profile__icon { font-size: 1.3rem; }
+.nav-profile__name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.nav-profile__dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12); padding: 16px; min-width: 220px; z-index: 100; margin-top: 8px; }
+.nav-profile__dropdown.show { display: block; }
+.nav-profile__info { margin-bottom: 12px; }
+.nav-profile__info strong { display: block; font-size: 0.95rem; }
+.nav-profile__info small { display: block; color: var(--text-light); font-size: 0.8rem; margin-top: 2px; }
+.nav-profile__logout { display: block; text-align: center; padding: 8px 16px; background: #fee2e2; color: #dc2626; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
+.nav-profile__logout:hover { background: #fecaca; }

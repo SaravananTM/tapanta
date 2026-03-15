@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebase",
+      ".git",
+      ".gitignore",
+      "api.php",
+      "CNAME"
+    ]
+  }
+}
