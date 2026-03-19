@@ -130,3 +130,41 @@ document.addEventListener('click', function(e) {
     dropdown.classList.remove('show');
   }
 });
+
+// Booking auth gate - intercept Book Now clicks when not logged in
+document.addEventListener('click', function(e) {
+  // Skip on admin page
+  if (window.location.pathname.indexOf('admin') !== -1) return;
+  var link = e.target.closest('a[href*="booking"]');
+  if (!link) {
+    // Also check for Book Now buttons on expert cards/profiles
+    var btn = e.target.closest('.expert-card__actions .btn, .profile__sidebar .btn');
+    if (btn) link = btn;
+  }
+  if (!link) return;
+  var text = link.textContent.toLowerCase();
+  if (text.indexOf('book') === -1) return;
+  if (auth.currentUser) return;
+  e.preventDefault();
+  e.stopPropagation();
+  showLoginPrompt();
+});
+
+function showLoginPrompt() {
+  if (document.getElementById('loginPromptModal')) return;
+  var overlay = document.createElement('div');
+  overlay.id = 'loginPromptModal';
+  overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;';
+  overlay.innerHTML = '<div style="background:#fff;border-radius:16px;padding:32px;max-width:380px;width:90%;text-align:center;">' +
+    '<div style="font-size:2.5rem;margin-bottom:12px;">🔐</div>' +
+    '<h3 style="margin-bottom:8px;">Sign in to Book</h3>' +
+    '<p style="color:#666;margin-bottom:20px;font-size:0.9rem;">Please sign in with your Google account to book a consultation.</p>' +
+    '<button onclick="tapantaSignIn();document.getElementById(\'loginPromptModal\').remove();" style="width:100%;padding:12px;background:#4285F4;color:#fff;border:none;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;">' +
+      '<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:20px;height:20px;"> Sign in with Google</button>' +
+    '<a href="#" onclick="document.getElementById(\'loginPromptModal\').remove();return false;" style="display:block;margin-top:14px;color:#888;font-size:0.85rem;">Cancel</a>' +
+    '</div>';
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', function(ev) {
+    if (ev.target === overlay) overlay.remove();
+  });
+}
