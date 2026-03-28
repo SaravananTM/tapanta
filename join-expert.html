@@ -20,7 +20,7 @@
 
   <header class="header">
     <nav class="nav">
-      <a href="/" class="nav__logo">Tapanta</a>
+      <a href="/" class="nav__logo"><img src="images/Tapanta_Logo.png" alt="Tapanta"></a>
       <ul class="nav__links" id="navLinks">
         <li><a href="/">Home</a></li>
         <li><a href="categories.html">Categories</a></li>
@@ -61,6 +61,14 @@
             <input type="tel" id="phone" placeholder="+91 9876543210" required>
           </div>
           <div class="form-group">
+            <label for="photoUpload">Profile Photo</label>
+            <div id="photoPreviewWrap" style="display:none;margin-bottom:10px;text-align:center;">
+              <img id="photoPreview" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid var(--border);" alt="Preview">
+            </div>
+            <input type="file" id="photoUpload" accept="image/*" style="font-size:0.9rem;">
+            <small style="color:var(--text-light);font-size:0.78rem;">Optional. JPG/PNG, max 2MB.</small>
+          </div>
+          <div class="form-group">
             <label for="gender">Gender *</label>
             <select id="gender" required>
               <option value="">Select gender</option>
@@ -77,8 +85,9 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="specialty">Specialty / Title *</label>
-            <input type="text" id="specialty" placeholder="e.g. General Physician, Corporate Lawyer" required>
+            <label for="specialty">Specialty / Title * <span id="specialtyCount" style="font-weight:400;font-size:0.8rem;color:var(--text-light);">(0/60)</span></label>
+            <input type="text" id="specialty" placeholder="e.g. General Physician, Corporate Lawyer" maxlength="60" required>
+            <small style="color:var(--text-light);font-size:0.78rem;">Keep it short — max 2 lines on expert card.</small>
           </div>
           <div class="form-group">
             <label for="experience">Years of Experience *</label>
@@ -180,6 +189,30 @@
           group.appendChild(opt);
         });
         catSelect.appendChild(group);
+      });
+    }
+    // Specialty character counter
+    var specInput = document.getElementById('specialty');
+    var specCount = document.getElementById('specialtyCount');
+    if (specInput && specCount) {
+      specInput.addEventListener('input', function() {
+        specCount.textContent = '(' + specInput.value.length + '/60)';
+      });
+    }
+
+    // Photo preview
+    var photoInput = document.getElementById('photoUpload');
+    var photoPreview = document.getElementById('photoPreview');
+    var photoWrap = document.getElementById('photoPreviewWrap');
+    if (photoInput) {
+      photoInput.addEventListener('change', function() {
+        var file = photoInput.files[0];
+        if (file) {
+          if (file.size > 2 * 1024 * 1024) { alert('Photo must be under 2MB.'); photoInput.value = ''; return; }
+          var reader = new FileReader();
+          reader.onload = function(e) { photoPreview.src = e.target.result; photoWrap.style.display = 'block'; };
+          reader.readAsDataURL(file);
+        }
       });
     }
   </script>

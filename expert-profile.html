@@ -20,7 +20,7 @@
 
   <header class="header">
     <nav class="nav">
-      <a href="/" class="nav__logo">Tapanta</a>
+      <a href="/" class="nav__logo"><img src="images/Tapanta_Logo.png" alt="Tapanta"></a>
       <ul class="nav__links" id="navLinks">
         <li><a href="/">Home</a></li>
         <li><a href="categories.html">Categories</a></li>
@@ -123,9 +123,13 @@
           const esc = (s) => { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
           document.querySelector('.profile__name').textContent = e.name;
           document.querySelector('.profile__title').textContent = e.specialty;
-          // Set profile icon from category
+          // Set profile photo or category icon
           var avatar = document.querySelector('.profile__avatar');
-          avatar.textContent = getSubIcon(e.category);
+          if (e.photo) {
+            avatar.innerHTML = '<img src="' + e.photo + '" alt="' + esc(e.name) + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">';
+          } else {
+            avatar.textContent = getSubIcon(e.category);
+          }
           document.querySelector('.profile__price').innerHTML = `₹${e.price} <span>/ session</span>`;
           document.querySelector('.profile__bio').textContent = e.bio;
           document.getElementById('statExp').textContent = e.experience;

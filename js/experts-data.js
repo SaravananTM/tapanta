@@ -1,7 +1,10 @@
 // Tapanta - Expert Data Management (Firebase Firestore backend)
 
-// Build expert card image HTML: always use category icon
-function expertImgHtml(name, category) {
+// Build expert card image HTML: use photo if available, otherwise category icon
+function expertImgHtml(name, category, photo) {
+  if (photo) {
+    return '<div class="expert-card__img"><img src="' + photo + '" alt="' + (name || '') + '" style="width:100%;height:100%;object-fit:cover;"></div>';
+  }
   var icon = (typeof getSubIcon === 'function') ? getSubIcon(category) : '👤';
   return '<div class="expert-card__img">' + icon + '</div>';
 }
@@ -62,6 +65,7 @@ const ExpertsDB = {
         bio: data.bio || '',
         price: data.price || '0',
         linkedin: data.linkedin || '',
+        photo: data.photo || '',
         availDays: data.availDays || '',
         availFrom: data.availFrom || '',
         availTo: data.availTo || '',
@@ -127,6 +131,17 @@ if (expertForm) {
     btn.disabled = true;
     btn.textContent = 'Submitting...';
 
+    // Convert photo to base64 if provided
+    let photoBase64 = '';
+    const photoFile = document.getElementById('photoUpload') ? document.getElementById('photoUpload').files[0] : null;
+    if (photoFile) {
+      photoBase64 = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (ev) => resolve(ev.target.result);
+        reader.readAsDataURL(photoFile);
+      });
+    }
+
     const data = {
       name: document.getElementById('fullName').value.trim(),
       email: document.getElementById('email').value.trim(),
@@ -139,6 +154,7 @@ if (expertForm) {
       bio: document.getElementById('bio').value.trim(),
       price: document.getElementById('price').value,
       linkedin: document.getElementById('linkedin').value.trim(),
+      photo: photoBase64,
       availDays: Array.from(document.querySelectorAll('input[name="days"]:checked')).map(function(c){return c.value;}).join(', '),
       availFrom: document.getElementById('availFrom').value,
       availTo: document.getElementById('availTo').value

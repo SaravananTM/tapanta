@@ -14,7 +14,7 @@
 <body>
   <header class="header">
     <nav class="nav">
-      <a href="/" class="nav__logo">Tapanta</a>
+      <a href="/" class="nav__logo"><img src="images/Tapanta_Logo.png" alt="Tapanta"></a>
       <ul class="nav__links" id="navLinks">
         <li><a href="/">Home</a></li>
         <li><a href="categories.html">Categories</a></li>
@@ -155,14 +155,14 @@
         d.textContent = e.specialty; var ss = d.innerHTML;
         d.textContent = e.category; var sc = d.innerHTML;
         return '<a href="expert-profile.html?id=' + e.id + '" class="expert-card">' +
-          expertImgHtml(e.name, e.category) + '<div class="expert-card__body">' +
+          expertImgHtml(e.name, e.category, e.photo) + '<div class="expert-card__body">' +
           '<div class="expert-card__name">' + sn + '</div>' +
           '<div class="expert-card__specialty">' + ss + ' &middot; ' + e.experience + ' yrs exp</div>' +
           '<div class="expert-card__meta"><span class="expert-card__price">&#8377;' + e.price + '/session</span></div>' +
           '<div class="expert-card__tags"><span class="tag">' + sc + '</span></div>' +
           '<div style="color:#10B981;font-size:0.75rem;font-weight:600;margin-top:4px;">🎉 First Session FREE</div>' +
           '<div style="color:#E53E3E;font-size:0.75rem;font-weight:600;margin-top:2px;display:none;" class="free-session-login">🔐 Sign in to claim your free session</div>' +
-          '<div class="expert-card__actions"><span class="btn btn--primary btn--sm btn--full">Book Now</span></div>' +
+          '<div class="expert-card__actions" style="margin-top:12px;"><span class="btn btn--primary btn--sm btn--full">Book Now</span></div>' +
           '</div></a>';
       }).join('');
       if (empty) empty.style.display = 'none';
