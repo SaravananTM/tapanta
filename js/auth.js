@@ -9,6 +9,23 @@ auth.onAuthStateChanged(async function(user) {
   const navLinks = document.getElementById('navLinks');
   if (!navLinks) return;
 
+  // Add theme toggle if not already present
+  if (!document.getElementById('themeToggleItem')) {
+    var themeLi = document.createElement('li');
+    themeLi.id = 'themeToggleItem';
+    themeLi.innerHTML = '<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>';
+    navLinks.appendChild(themeLi);
+    var toggle = document.getElementById('themeToggle');
+    var saved = localStorage.getItem('tapanta-theme');
+    if (saved === 'dark') { document.body.classList.add('dark-theme'); toggle.textContent = '☀️'; }
+    toggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-theme');
+      var isDark = document.body.classList.contains('dark-theme');
+      toggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('tapanta-theme', isDark ? 'dark' : 'light');
+    });
+  }
+
   // Toggle free session tags based on login state
   document.querySelectorAll('.free-session-login').forEach(function(el) { el.style.display = user ? 'none' : 'block'; });
   var freeTag = document.getElementById('freeSessionTag');
