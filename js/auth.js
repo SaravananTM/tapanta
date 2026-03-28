@@ -9,6 +9,17 @@ auth.onAuthStateChanged(async function(user) {
   const navLinks = document.getElementById('navLinks');
   if (!navLinks) return;
 
+  // Toggle free session tags based on login state
+  document.querySelectorAll('.free-session-login').forEach(function(el) { el.style.display = user ? 'none' : 'block'; });
+  var freeTag = document.getElementById('freeSessionTag');
+  var freeLogin = document.getElementById('freeSessionLogin');
+  if (freeTag) freeTag.style.display = user ? 'block' : 'none';
+  if (freeLogin) freeLogin.style.display = user ? 'none' : 'block';
+  var freeBooking = document.getElementById('freeSessionBooking');
+  var freeBookingLogin = document.getElementById('freeSessionBookingLogin');
+  if (freeBooking) freeBooking.style.display = user ? 'block' : 'none';
+  if (freeBookingLogin) freeBookingLogin.style.display = user ? 'none' : 'block';
+
   // Remove existing auth elements
   const oldAuth = document.getElementById('navAuthItem');
   if (oldAuth) oldAuth.remove();
