@@ -17,8 +17,12 @@ function getDB() {
 const ExpertsDB = {
   async getAll() {
     try {
-      const snap = await getDB().collection('experts').orderBy('appliedAt', 'desc').get();
-      return snap.docs.map(doc => doc.data());
+      const snap = await getDB().collection('experts').get();
+      var docs = snap.docs.map(doc => doc.data());
+      docs.sort(function(a, b) {
+        return (b.appliedAt || '').localeCompare(a.appliedAt || '');
+      });
+      return docs;
     } catch (err) {
       console.error('Failed to fetch experts:', err);
       return [];
