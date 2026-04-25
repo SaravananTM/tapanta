@@ -228,7 +228,10 @@ async function renderBookings() {
 
 function getWhatsAppBtn(b, dateStr) {
   var phone = (b.expertPhone || '').replace(/[^0-9]/g, '');
-  if (!phone) return '<span style="font-size:0.8rem;color:var(--text-light);">No phone</span>';
+  if (!phone) {
+    // Try to fetch from experts collection
+    return '<button class="btn btn--sm" style="background:#25D366;color:#fff;" onclick="fetchAndWhatsApp(\'' + b.expertId + '\',\'' + encodeURIComponent(b.userName || 'User') + '\',\'' + encodeURIComponent(dateStr) + '\',\'' + encodeURIComponent(b.timeSlot || '-') + '\',\'' + encodeURIComponent(b.type || '-') + '\',\'' + (b.price || 0) + '\',\'' + encodeURIComponent(b.meetLink || '-') + '\')">📲 WhatsApp Expert</button>';
+  }
   if (phone.length === 10) phone = '91' + phone;
   var msg = '🔔 *New Booking on Tapanta!*\n\n' +
     '👤 *Client:* ' + (b.userName || 'User') + '\n' +
@@ -239,4 +242,20 @@ function getWhatsAppBtn(b, dateStr) {
     '🔗 *Session Link:* ' + (b.meetLink || '-') + '\n\n' +
     'Please join at the booked time. Thank you!';
   return '<a href="https://wa.me/' + phone + '?text=' + encodeURIComponent(msg) + '" target="_blank" rel="noopener" class="btn btn--sm" style="background:#25D366;color:#fff;">📲 WhatsApp Expert</a>';
+}
+
+async function fetchAndWhatsApp(expertId, userName, dateStr, timeSlot, type, price, meetLink) {
+  var expert = await ExpertsDB.getById(expertId);
+  if (!expert || !expert.phone) { alert('Expert phone not found.'); return; }
+  var phone = expert.phone.replace(/[^0-9]/g, '');
+  if (phone.length === 10) phone = '91' + phone;
+  var msg = '🔔 *New Booking on Tapanta!*\n\n' +
+    '👤 *Client:* ' + decodeURIComponent(userName) + '\n' +
+    '📅 *Date:* ' + decodeURIComponent(dateStr) + '\n' +
+    '🕐 *Time:* ' + decodeURIComponent(timeSlot) + '\n' +
+    '📋 *Type:* ' + decodeURIComponent(type) + '\n' +
+    '💰 *Fee:* ₹' + price + '\n\n' +
+    '🔗 *Session Link:* ' + decodeURIComponent(meetLink) + '\n\n' +
+    'Please join at the booked time. Thank you!';
+  window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
 }
