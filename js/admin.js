@@ -212,11 +212,11 @@ async function renderBookings() {
           <div class="expert-row__meta">${escapeHtml(b.expertSpecialty || '')} · ${d} at ${escapeHtml(b.timeSlot || '-')} · ₹${b.price || 0}</div>
           <div class="expert-row__detail">
             <strong>User Email:</strong> ${escapeHtml(b.userEmail || '-')} · <strong>Payment:</strong> ${escapeHtml(b.paymentStatus || '-')} · <strong>Status:</strong> <span style="color:${statusColor};font-weight:600;">${b.status || '-'}</span><br>
-            ${b.meetLink ? '<strong>Meet Link:</strong> <a href="' + escapeHtml(b.meetLink) + '" target="_blank" rel="noopener">' + escapeHtml(b.meetLink) + '</a><br>' : ''}
+            ${b.meetLink ? '<strong>Meet Link:</strong> <a href="' + escapeHtml(b.meetLink) + '" target="_blank" rel="noopener">' + escapeHtml(b.meetLink) + '</a>' : ''}
           </div>
         </div>
         <div style="display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;align-items:flex-start;">
-          ${b.expertPhone ? '<a href="https://wa.me/' + b.expertPhone.replace(/[^0-9]/g, '').replace(/^(?!91)(\\d{10})$/, '91$1') + '?text=' + encodeURIComponent('🔔 Booking Update - Tapanta\\n\\nClient: ' + (b.userName || 'User') + '\\nDate: ' + d + '\\nTime: ' + (b.timeSlot || '-') + '\\nType: ' + (b.type || '-') + '\\nMeet: ' + (b.meetLink || '-')) + '" target="_blank" rel="noopener" class="btn btn--sm" style="background:#25D366;color:#fff;">📲 WhatsApp Expert</a>' : ''}
+          ${getWhatsAppBtn(b, d)}
         </div>
       </div>`;
     }).join('');
@@ -224,4 +224,19 @@ async function renderBookings() {
     console.error('Failed to load bookings:', err);
     container.innerHTML = '<div class="empty-state"><div class="empty-state__icon">⚠️</div><p>Failed to load bookings.</p></div>';
   }
+}
+
+function getWhatsAppBtn(b, dateStr) {
+  var phone = (b.expertPhone || '').replace(/[^0-9]/g, '');
+  if (!phone) return '<span style="font-size:0.8rem;color:var(--text-light);">No phone</span>';
+  if (phone.length === 10) phone = '91' + phone;
+  var msg = '🔔 *New Booking on Tapanta!*\n\n' +
+    '👤 *Client:* ' + (b.userName || 'User') + '\n' +
+    '📅 *Date:* ' + dateStr + '\n' +
+    '🕐 *Time:* ' + (b.timeSlot || '-') + '\n' +
+    '📋 *Type:* ' + (b.type || '-') + '\n' +
+    '💰 *Fee:* ₹' + (b.price || 0) + '\n\n' +
+    '🔗 *Session Link:* ' + (b.meetLink || '-') + '\n\n' +
+    'Please join at the booked time. Thank you!';
+  return '<a href="https://wa.me/' + phone + '?text=' + encodeURIComponent(msg) + '" target="_blank" rel="noopener" class="btn btn--sm" style="background:#25D366;color:#fff;">📲 WhatsApp Expert</a>';
 }
