@@ -69,7 +69,7 @@
 
           <h2 style="font-size:1.2rem;margin-top:32px;margin-bottom:16px;">2. Select Date</h2>
           <div class="filters" style="margin-bottom:0;">
-            <input type="date" id="bookingDate" aria-label="Select date" style="flex:1;" required>
+            <input type="date" id="bookingDate" aria-label="Select date" style="flex:1;cursor:pointer;font-size:1rem;padding:14px 16px;" required onclick="this.showPicker ? this.showPicker() : null">
           </div>
           <p id="availDaysHint" style="font-size:0.82rem;color:var(--text-light);margin-top:8px;"></p>
 
@@ -179,7 +179,9 @@
 
     // Set min date to today
     var today = new Date().toISOString().split('T')[0];
-    document.getElementById('bookingDate').min = today;
+    var dateInput = document.getElementById('bookingDate');
+    dateInput.min = today;
+    dateInput.value = '';
 
     // Show available days hint
     if (expert.availDays) {
@@ -240,6 +242,14 @@
     // Date selection
     document.getElementById('bookingDate').addEventListener('change', function() {
       selectedDate = this.value;
+      if (selectedDate && selectedDate < today) {
+        alert('Please select a future date.');
+        this.value = '';
+        selectedDate = '';
+        document.getElementById('sumDate').textContent = 'Select a date';
+        checkReady();
+        return;
+      }
       if (selectedDate) {
         var d = new Date(selectedDate + 'T00:00:00');
         document.getElementById('sumDate').textContent = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
