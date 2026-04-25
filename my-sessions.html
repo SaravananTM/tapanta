@@ -45,10 +45,10 @@
       </div>
 
       <div id="sessionsContent" style="display:none;">
-        <div class="admin-tabs" style="margin-bottom:24px;">
-          <button class="admin-tab active" data-tab="upcoming">Upcoming</button>
-          <button class="admin-tab" data-tab="past">Past</button>
-          <button class="admin-tab" data-tab="all">All</button>
+        <div style="background:#1E293B;border-radius:var(--radius);padding:4px;display:inline-flex;gap:4px;margin-bottom:24px;">
+          <button class="admin-tab active" data-tab="upcoming" style="border:none;background:#fff;color:#1E293B;padding:10px 20px;border-radius:8px;font-weight:600;font-size:0.9rem;cursor:pointer;font-family:inherit;transition:all 0.2s;">Upcoming</button>
+          <button class="admin-tab" data-tab="past" style="border:none;background:transparent;color:#94A3B8;padding:10px 20px;border-radius:8px;font-weight:600;font-size:0.9rem;cursor:pointer;font-family:inherit;transition:all 0.2s;">Past</button>
+          <button class="admin-tab" data-tab="all" style="border:none;background:transparent;color:#94A3B8;padding:10px 20px;border-radius:8px;font-weight:600;font-size:0.9rem;cursor:pointer;font-family:inherit;transition:all 0.2s;">All</button>
         </div>
         <div id="sessionsList"></div>
       </div>
@@ -112,8 +112,14 @@
   // Tab switching
   document.querySelectorAll('.admin-tab').forEach(function(tab) {
     tab.addEventListener('click', function() {
-      document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.admin-tab').forEach(function(t) {
+        t.classList.remove('active');
+        t.style.background = 'transparent';
+        t.style.color = '#94A3B8';
+      });
       tab.classList.add('active');
+      tab.style.background = '#fff';
+      tab.style.color = '#1E293B';
       currentTab = tab.dataset.tab;
       renderSessions();
     });
