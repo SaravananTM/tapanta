@@ -54,9 +54,9 @@
           <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
             <div id="freeSessionTag" style="background: linear-gradient(135deg, #10B981, #059669); color: #fff; text-align: center; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600;">🎉 First Session FREE!</div>
             <div id="freeSessionLogin" style="background: linear-gradient(135deg, #E53E3E, #C53030); color: #fff; text-align: center; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; display: none; cursor: pointer;" onclick="tapantaSignIn()">🔐 Sign in to get your first session FREE</div>
-            <a href="booking.html" class="btn btn--primary btn--full">💬 Book Chat</a>
-            <a href="booking.html" class="btn btn--outline btn--full">📞 Book Call</a>
-            <a href="booking.html" class="btn btn--accent btn--full">📹 Book Video</a>
+            <a href="booking.html?expert=EXPERT_ID&type=chat" class="btn btn--primary btn--full booking-link">💬 Book Chat</a>
+            <a href="booking.html?expert=EXPERT_ID&type=call" class="btn btn--outline btn--full booking-link">📞 Book Call</a>
+            <a href="booking.html?expert=EXPERT_ID&type=video" class="btn btn--accent btn--full booking-link">📹 Book Video</a>
           </div>
         </aside>
 
@@ -136,6 +136,10 @@
           const quals = e.qualifications.split('\n').filter(q => q.trim());
           document.querySelector('.profile__qualifications').innerHTML = quals.map(q => `<li>${esc(q)}</li>`).join('');
           document.title = `${e.name} - Tapanta`;
+          // Update booking links with expert ID
+          document.querySelectorAll('.booking-link').forEach(function(link) {
+            link.href = link.href.replace('EXPERT_ID', e.id);
+          });
           // Populate availability schedule
           var availHtml = '';
           if (e.availDays && e.availDays.trim()) {

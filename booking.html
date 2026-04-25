@@ -7,17 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NHERV4JEE"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-5NHERV4JEE");
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-5NHERV4JEE");</script>
 </head>
 <body>
-
   <header class="header">
     <nav class="nav">
       <a href="/" class="nav__logo">Tapanta</a>
@@ -30,136 +23,109 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="booking.html" class="nav__cta">Book Now</a></li>
       </ul>
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
     </nav>
   </header>
 
   <section class="page-header">
     <div class="container">
       <h1>Book a Consultation</h1>
-      <p>Choose your preferred consultation type and time</p>
+      <p id="bookingSubtitle">Choose your preferred consultation type and time</p>
     </div>
   </section>
 
-  <section class="section">
+  <!-- No expert selected -->
+  <div id="noExpertMsg" style="display:none;">
+    <section class="section">
+      <div class="container" style="text-align:center;padding:60px 20px;">
+        <div style="font-size:3rem;margin-bottom:16px;">🔍</div>
+        <h2>No expert selected</h2>
+        <p style="color:var(--text-light);margin:12px 0 24px;">Please select an expert first to book a consultation.</p>
+        <a href="experts.html" class="btn btn--primary btn--lg">Browse Experts</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Booking form -->
+  <section class="section" id="bookingSection" style="display:none;">
     <div class="container">
       <div class="booking-grid">
         <div>
-          <h2 style="font-size: 1.2rem; margin-bottom: 20px;">1. Choose Consultation Type</h2>
-          <div class="booking__options">
+          <h2 style="font-size:1.2rem;margin-bottom:20px;">1. Choose Consultation Type</h2>
+          <div class="booking__options" id="typeOptions">
             <div class="booking__option active" data-type="chat">
               <div class="booking__option-icon">💬</div>
-              <div>
-                <div class="booking__option-title">Chat Consultation</div>
-                <div class="booking__option-desc">Text-based consultation. Great for quick questions and follow-ups.</div>
-              </div>
+              <div><div class="booking__option-title">Chat Consultation</div><div class="booking__option-desc">Text-based consultation. Great for quick questions.</div></div>
             </div>
             <div class="booking__option" data-type="call">
               <div class="booking__option-icon">📞</div>
-              <div>
-                <div class="booking__option-title">Audio Call</div>
-                <div class="booking__option-desc">Voice consultation for detailed discussions and explanations.</div>
-              </div>
+              <div><div class="booking__option-title">Audio Call</div><div class="booking__option-desc">Voice consultation for detailed discussions.</div></div>
             </div>
             <div class="booking__option" data-type="video">
               <div class="booking__option-icon">📹</div>
-              <div>
-                <div class="booking__option-title">Video Call</div>
-                <div class="booking__option-desc">Face-to-face video consultation for comprehensive advice.</div>
-              </div>
+              <div><div class="booking__option-title">Video Call</div><div class="booking__option-desc">Face-to-face video consultation.</div></div>
             </div>
           </div>
 
-          <h2 style="font-size: 1.2rem; margin-top: 32px; margin-bottom: 16px;">2. Select Date</h2>
-          <div class="filters" style="margin-bottom: 0;">
-            <input type="date" aria-label="Select date" style="flex: 1;">
+          <h2 style="font-size:1.2rem;margin-top:32px;margin-bottom:16px;">2. Select Date</h2>
+          <div class="filters" style="margin-bottom:0;">
+            <input type="date" id="bookingDate" aria-label="Select date" style="flex:1;" required>
           </div>
+          <p id="availDaysHint" style="font-size:0.82rem;color:var(--text-light);margin-top:8px;"></p>
 
-          <h2 style="font-size: 1.2rem; margin-top: 32px; margin-bottom: 16px;">3. Select Time Slot</h2>
-          <div class="booking__slots">
-            <div class="slot">9:00 AM</div>
-            <div class="slot">9:30 AM</div>
-            <div class="slot active">10:00 AM</div>
-            <div class="slot">10:30 AM</div>
-            <div class="slot">11:00 AM</div>
-            <div class="slot">11:30 AM</div>
-            <div class="slot">4:00 PM</div>
-            <div class="slot">4:30 PM</div>
-            <div class="slot">5:00 PM</div>
-            <div class="slot">5:30 PM</div>
-            <div class="slot">6:00 PM</div>
-            <div class="slot">6:30 PM</div>
-          </div>
+          <h2 style="font-size:1.2rem;margin-top:32px;margin-bottom:16px;">3. Select Time Slot</h2>
+          <div class="booking__slots" id="timeSlots"></div>
         </div>
 
         <aside class="booking__summary">
           <h3>Booking Summary</h3>
-          <div class="summary__row">
-            <span>Expert</span>
-            <span>Dr. Priya Sharma</span>
-          </div>
-          <div class="summary__row">
-            <span>Type</span>
-            <span>Chat Consultation</span>
-          </div>
-          <div class="summary__row">
-            <span>Duration</span>
-            <span>30 minutes</span>
-          </div>
-          <div class="summary__row">
-            <span>Date</span>
-            <span>Select a date</span>
-          </div>
-          <div class="summary__row">
-            <span>Time</span>
-            <span>10:00 AM</span>
-          </div>
-          <div class="summary__row">
-            <span>Consultation Fee</span>
-            <span>₹500</span>
-          </div>
-          <div class="summary__row">
-            <span>Platform Fee</span>
-            <span>₹50</span>
-          </div>
-          <div class="summary__row">
-            <span class="summary__total">Total</span>
-            <span class="summary__total">₹550</span>
-          </div>
+          <div class="summary__row"><span>Expert</span><span id="sumExpert">-</span></div>
+          <div class="summary__row"><span>Specialty</span><span id="sumSpecialty">-</span></div>
+          <div class="summary__row"><span>Type</span><span id="sumType">Chat Consultation</span></div>
+          <div class="summary__row"><span>Duration</span><span>30 minutes</span></div>
+          <div class="summary__row"><span>Date</span><span id="sumDate">Select a date</span></div>
+          <div class="summary__row"><span>Time</span><span id="sumTime">Select a slot</span></div>
+          <div class="summary__row"><span>Consultation Fee</span><span id="sumFee">-</span></div>
+          <div class="summary__row"><span class="summary__total">Total</span><span class="summary__total" id="sumTotal">-</span></div>
 
-          <h3 style="margin-top: 24px;">Payment Method</h3>
-          <div class="booking__options" style="margin-top: 12px;">
-            <div class="booking__option active" style="padding: 12px 16px;">
-              <div>💳</div>
-              <div><div class="booking__option-title" style="font-size: 0.9rem;">UPI</div></div>
-            </div>
-            <div class="booking__option" style="padding: 12px 16px;">
-              <div>💳</div>
-              <div><div class="booking__option-title" style="font-size: 0.9rem;">Debit / Credit Card</div></div>
-            </div>
-            <div class="booking__option" style="padding: 12px 16px;">
-              <div>👛</div>
-              <div><div class="booking__option-title" style="font-size: 0.9rem;">Wallet</div></div>
-            </div>
-          </div>
-
-          <button class="btn btn--primary btn--full btn--lg" style="margin-top: 20px;">Pay ₹550 & Book</button>
-          <p id="freeSessionBooking" style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: #10B981; font-weight: 600;">🎉 Your first session is FREE — no payment needed!</p>
-          <p id="freeSessionBookingLogin" style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: #E53E3E; font-weight: 600; display: none; cursor: pointer;" onclick="tapantaSignIn()">🔐 Sign in to claim your first FREE session</p>
+          <button class="btn btn--primary btn--full btn--lg" style="margin-top:24px;" id="bookBtn" disabled>Confirm & Book Session</button>
+          <p style="text-align:center;margin-top:10px;font-size:0.8rem;color:var(--text-light);">💡 Payment skipped for testing — session auto-confirmed</p>
         </aside>
       </div>
     </div>
   </section>
 
+  <!-- Booking confirmation -->
+  <div id="confirmationSection" style="display:none;">
+    <section class="section">
+      <div class="container" style="max-width:600px;text-align:center;">
+        <div style="font-size:4rem;margin-bottom:16px;">✅</div>
+        <h2>Session Booked!</h2>
+        <p style="color:var(--text-light);margin:12px 0 24px;">Your consultation has been confirmed.</p>
+        <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:left;margin-bottom:24px;">
+          <div class="summary__row"><span>Expert</span><span id="confExpert">-</span></div>
+          <div class="summary__row"><span>Type</span><span id="confType">-</span></div>
+          <div class="summary__row"><span>Date</span><span id="confDate">-</span></div>
+          <div class="summary__row"><span>Time</span><span id="confTime">-</span></div>
+          <div class="summary__row"><span>Status</span><span style="color:#10B981;font-weight:600;">Confirmed</span></div>
+        </div>
+        <div style="background:#EEF2FF;border:1px solid #C7D2FE;border-radius:var(--radius);padding:20px;margin-bottom:24px;">
+          <p style="font-weight:600;margin-bottom:8px;">📹 Your Session Link</p>
+          <a id="confMeetLink" href="#" target="_blank" rel="noopener" style="word-break:break-all;font-size:0.9rem;">-</a>
+          <p style="font-size:0.8rem;color:var(--text-light);margin-top:8px;">Share this link with your expert. Both of you join at the booked time.</p>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <a href="my-sessions.html" class="btn btn--primary">My Sessions</a>
+          <a href="experts.html" class="btn btn--outline">Browse More Experts</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
-        <div>
-          <div class="footer__brand">Tapanta</div>
-          <p class="footer__desc">Making expert knowledge accessible, fast, and affordable for everyone.</p>
-        </div>
+        <div><div class="footer__brand">Tapanta</div><p class="footer__desc">Making expert knowledge accessible, fast, and affordable for everyone.</p></div>
         <div><h4>Platform</h4><ul><li><a href="categories.html">Categories</a></li><li><a href="experts.html">Find Experts</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About Us</a></li></ul></div>
         <div><h4>Support</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="contact.html">FAQ</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
         <div><h4>For Experts</h4><ul><li><a href="join-expert.html">Join as Expert</a></li><li><a href="#">Expert Dashboard</a></li></ul></div>
@@ -183,5 +149,180 @@
   </script>
   <script src="js/main.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/categories-data.js"></script>
+  <script src="js/experts-data.js"></script>
+  <script>
+  (async function() {
+    var params = new URLSearchParams(window.location.search);
+    var expertId = params.get('expert');
+    var preType = params.get('type') || 'chat';
+
+    if (!expertId) {
+      document.getElementById('noExpertMsg').style.display = 'block';
+      return;
+    }
+
+    var expert = await ExpertsDB.getById(expertId);
+    if (!expert) {
+      document.getElementById('noExpertMsg').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('bookingSection').style.display = 'block';
+    document.getElementById('bookingSubtitle').textContent = 'Booking with ' + expert.name;
+
+    // Populate summary
+    document.getElementById('sumExpert').textContent = expert.name;
+    document.getElementById('sumSpecialty').textContent = expert.specialty;
+    document.getElementById('sumFee').textContent = '₹' + expert.price;
+    document.getElementById('sumTotal').textContent = '₹' + expert.price;
+
+    // Set min date to today
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById('bookingDate').min = today;
+
+    // Show available days hint
+    if (expert.availDays) {
+      document.getElementById('availDaysHint').textContent = '📅 Available: ' + expert.availDays;
+    }
+
+    // Generate time slots from expert availability
+    function generateSlots() {
+      var from = expert.availFrom || '09:00';
+      var to = expert.availTo || '18:00';
+      var slots = [];
+      var h = parseInt(from.split(':')[0]), m = parseInt(from.split(':')[1] || 0);
+      var endH = parseInt(to.split(':')[0]), endM = parseInt(to.split(':')[1] || 0);
+      while (h < endH || (h === endH && m < endM)) {
+        var ampm = h >= 12 ? 'PM' : 'AM';
+        var dh = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+        slots.push(dh + ':' + (m < 10 ? '0' + m : m) + ' ' + ampm);
+        m += 30;
+        if (m >= 60) { h++; m = 0; }
+      }
+      return slots;
+    }
+
+    var slots = generateSlots();
+    var slotsEl = document.getElementById('timeSlots');
+    slotsEl.innerHTML = slots.map(function(s) {
+      return '<div class="slot" data-time="' + s + '">' + s + '</div>';
+    }).join('');
+
+    // State
+    var selectedType = preType;
+    var selectedDate = '';
+    var selectedTime = '';
+
+    // Pre-select type from URL
+    document.querySelectorAll('#typeOptions .booking__option').forEach(function(opt) {
+      opt.classList.remove('active');
+      if (opt.dataset.type === preType) opt.classList.add('active');
+    });
+    updateSumType();
+
+    // Type selection
+    document.querySelectorAll('#typeOptions .booking__option').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('#typeOptions .booking__option').forEach(function(o) { o.classList.remove('active'); });
+        opt.classList.add('active');
+        selectedType = opt.dataset.type;
+        updateSumType();
+        checkReady();
+      });
+    });
+
+    function updateSumType() {
+      var labels = { chat: 'Chat Consultation', call: 'Audio Call', video: 'Video Call' };
+      document.getElementById('sumType').textContent = labels[selectedType] || selectedType;
+    }
+
+    // Date selection
+    document.getElementById('bookingDate').addEventListener('change', function() {
+      selectedDate = this.value;
+      if (selectedDate) {
+        var d = new Date(selectedDate + 'T00:00:00');
+        document.getElementById('sumDate').textContent = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      }
+      checkReady();
+    });
+
+    // Time slot selection
+    slotsEl.addEventListener('click', function(e) {
+      var slot = e.target.closest('.slot');
+      if (!slot) return;
+      slotsEl.querySelectorAll('.slot').forEach(function(s) { s.classList.remove('active'); });
+      slot.classList.add('active');
+      selectedTime = slot.dataset.time;
+      document.getElementById('sumTime').textContent = selectedTime;
+      checkReady();
+    });
+
+    function checkReady() {
+      var ready = selectedType && selectedDate && selectedTime;
+      document.getElementById('bookBtn').disabled = !ready;
+    }
+
+    // Book button
+    document.getElementById('bookBtn').addEventListener('click', async function() {
+      var user = firebase.auth().currentUser;
+      if (!user) {
+        showLoginPrompt();
+        return;
+      }
+
+      var btn = this;
+      btn.disabled = true;
+      btn.textContent = 'Booking...';
+
+      // Generate meet link
+      var roomId = 'tapanta-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      var meetLink = 'https://meet.jit.si/' + roomId;
+
+      var bookingId = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      var booking = {
+        id: bookingId,
+        expertId: expert.id,
+        expertName: expert.name,
+        expertSpecialty: expert.specialty,
+        expertCategory: expert.category,
+        userId: user.uid,
+        userName: user.displayName || '',
+        userEmail: user.email || '',
+        type: selectedType,
+        date: selectedDate,
+        timeSlot: selectedTime,
+        price: expert.price,
+        paymentStatus: 'paid',
+        paymentId: 'TEST-' + Date.now(),
+        status: 'confirmed',
+        meetLink: meetLink,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        await firebase.firestore().collection('bookings').doc(bookingId).set(booking);
+
+        // Show confirmation
+        document.getElementById('bookingSection').style.display = 'none';
+        document.querySelector('.page-header').style.display = 'none';
+        document.getElementById('confirmationSection').style.display = 'block';
+        document.getElementById('confExpert').textContent = expert.name;
+        var typeLabels = { chat: '💬 Chat', call: '📞 Audio Call', video: '📹 Video Call' };
+        document.getElementById('confType').textContent = typeLabels[selectedType] || selectedType;
+        var dd = new Date(selectedDate + 'T00:00:00');
+        document.getElementById('confDate').textContent = dd.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        document.getElementById('confTime').textContent = selectedTime;
+        document.getElementById('confMeetLink').href = meetLink;
+        document.getElementById('confMeetLink').textContent = meetLink;
+      } catch (err) {
+        console.error('Booking failed:', err);
+        alert('Booking failed. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Confirm & Book Session';
+      }
+    });
+  })();
+  </script>
 </body>
 </html>

@@ -13,6 +13,21 @@ auth.onAuthStateChanged(async function(user) {
   var saved = localStorage.getItem('tapanta-theme');
   if (saved === 'dark') document.body.classList.add('dark-theme');
 
+  // Add/remove My Sessions nav link based on login
+  var sessionsLink = document.getElementById('navSessionsItem');
+  if (user && !sessionsLink) {
+    var sli = document.createElement('li');
+    sli.id = 'navSessionsItem';
+    sli.innerHTML = '<a href="my-sessions.html">My Sessions</a>';
+    // Insert before Blog link
+    var blogLink = null;
+    navLinks.querySelectorAll('a').forEach(function(a) { if (a.textContent.trim() === 'Blog') blogLink = a.closest('li'); });
+    if (blogLink) navLinks.insertBefore(sli, blogLink);
+    else navLinks.appendChild(sli);
+  } else if (!user && sessionsLink) {
+    sessionsLink.remove();
+  }
+
   // Toggle free session tags based on login state
   document.querySelectorAll('.free-session-login').forEach(function(el) { el.style.display = user ? 'none' : 'block'; });
   var freeTag = document.getElementById('freeSessionTag');

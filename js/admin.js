@@ -78,9 +78,24 @@ async function renderStats() {
       <div class="admin-stat__label">Rejected</div>
     </div>
   `;
+
+  // Add bookings count
+  try {
+    var bSnap = await firebase.firestore().collection('bookings').get();
+    document.getElementById('adminStats').innerHTML += `
+      <div class="admin-stat">
+        <div class="admin-stat__value" style="color: #7C3AED;">${bSnap.docs.length}</div>
+        <div class="admin-stat__label">Total Bookings</div>
+      </div>
+    `;
+  } catch(e) { console.error(e); }
 }
 
 async function renderExperts() {
+  if (currentTab === 'bookings') {
+    await renderBookings();
+    return;
+  }
   const all = await ExpertsDB.getAll();
   let filtered;
 
@@ -171,4 +186,39 @@ if (isLoggedIn()) {
   showPanel();
 } else {
   showLogin();
+}
+
+async function renderBookings() {
+  const container = document.getElementById('expertsList');
+  try {
+    const snap = await firebase.firestore().collection('bookings').get();
+    var bookings = snap.docs.map(d => d.data());
+    bookings.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+
+    if (bookings.length === 0) {
+      container.innerHTML = '<div class="empty-state"><div class="empty-state__icon">📅</div><p>No bookings yet.</p></div>';
+      return;
+    }
+
+    container.innerHTML = bookings.map(b => {
+      var typeIcons = { chat: '💬', call: '📞', video: '📹' };
+      var icon = typeIcons[b.type] || '📅';
+      var d = b.date ? new Date(b.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
+      var statusColor = b.status === 'confirmed' ? '#10B981' : '#64748B';
+      return `<div class="expert-row">
+        <div style="font-size:1.8rem;flex-shrink:0;">${icon}</div>
+        <div class="expert-row__info">
+          <div class="expert-row__name">${escapeHtml(b.userName || 'Unknown User')} → ${escapeHtml(b.expertName || 'Unknown Expert')}</div>
+          <div class="expert-row__meta">${escapeHtml(b.expertSpecialty || '')} · ${d} at ${escapeHtml(b.timeSlot || '-')} · ₹${b.price || 0}</div>
+          <div class="expert-row__detail">
+            <strong>User Email:</strong> ${escapeHtml(b.userEmail || '-')} · <strong>Payment:</strong> ${escapeHtml(b.paymentStatus || '-')} · <strong>Status:</strong> <span style="color:${statusColor};font-weight:600;">${b.status || '-'}</span><br>
+            ${b.meetLink ? '<strong>Meet Link:</strong> <a href="' + escapeHtml(b.meetLink) + '" target="_blank" rel="noopener">' + escapeHtml(b.meetLink) + '</a>' : ''}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch (err) {
+    console.error('Failed to load bookings:', err);
+    container.innerHTML = '<div class="empty-state"><div class="empty-state__icon">⚠️</div><p>Failed to load bookings.</p></div>';
+  }
 }
